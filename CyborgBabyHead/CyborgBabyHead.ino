@@ -1,11 +1,12 @@
-// Cyborg Baby Head controller
-// Reacts to HIGH/LOW changes in a simple tilt sensor to trigger vibration motors, servos,
-// LEDs, and a winking baby eye. While "idle", there will be random movements from the 
-// different components.
+/* Cyborg Baby Head controller
+ Reacts to HIGH/LOW changes in a simple tilt sensor to trigger vibration motors, servos,
+ LEDs, and a winking baby eye. While "idle", there will be random movements from the 
+ different components.
 
-// Built on an Arduino Uno
+ Built on an Arduino Uno
 
-// by Zachary Rice <https://github.com/ZarrinX> 
+ by Zachary Rice 
+ https://github.com/ZarrinX */
 
 #include <Servo.h> 
 
@@ -41,4 +42,15 @@ void setup()
   //Set startup values
   TiltState = digitalRead(TiltSen);
   
+  // Sets the RGB value to Blue. The RGB LED used is a common Anode type. LOW values allow the curreent to flow. This is called current sinking. 
+  // Common Cathode would be more intuitive but RadioShack :/
+  digitalWrite(rLED, HIGH);
+  digitalWrite(gLED, HIGH);
+  digitalWrite(bLED, LOW);
+  
 } 
+
+void loop()
+{
+  
+}
