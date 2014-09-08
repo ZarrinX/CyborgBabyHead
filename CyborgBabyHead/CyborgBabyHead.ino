@@ -108,12 +108,13 @@ void HorrorShow()
   
   unsigned long currentMillis = millis(); // Starts the 5 seconds timer for the HorrorShow event (defined in thr global variable "Interval")
   
-  
   while(currentMillis - previousMillis > Interval)
   {
     int pos = random(10, 170);
     delay(500);
   }
+  
+  digitalWrite(Motor, LOW); // Turn off the vibration motor
   
   digitalWrite(rLED, HIGH);
   digitalWrite(gLED, HIGH);
