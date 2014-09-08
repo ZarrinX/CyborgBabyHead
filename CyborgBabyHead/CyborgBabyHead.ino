@@ -17,7 +17,7 @@ int pos = 0;    // variable to store the servo position
 int TiltState = 0;         // Stores the HIGH/LOW value of the tilt sensor
 int randVal = 0;
 long Interval = 5000;           // interval at which to run the HorrorShow (milliseconds)
-long previousMillis = 0;        // will store last time HorrorShow was updated
+
 
 // Define the RGB LEDs (Uses PWM for full spectrum control)
 int rLED = 6;
@@ -99,6 +99,7 @@ void loop()
 //  Kinetic events triggered by the disruption of the tilt sensor
 void HorrorShow()
 {
+  
   // Eye turns Red
   digitalWrite(rLED, LOW);
   digitalWrite(gLED, HIGH);
@@ -106,16 +107,21 @@ void HorrorShow()
   
   digitalWrite(Motor, HIGH); // Turn on the vibration motor
   
+  long previousMillis = 0;        // will store last time HorrorShow was updated
+  
   unsigned long currentMillis = millis(); // Starts the 5 seconds timer for the HorrorShow event (defined in thr global variable "Interval")
   
+  //int value = random(20, 160);
   while(currentMillis - previousMillis > Interval)
   {
-    int pos = random(10, 170);
-    delay(500);
+    int val = random(20, 160);
+    BabySpine.write(val);
+    delay(random(40, 350));
   }
   
   digitalWrite(Motor, LOW); // Turn off the vibration motor
   
+  //  Reset RGB values
   digitalWrite(rLED, HIGH);
   digitalWrite(gLED, HIGH);
   digitalWrite(bLED, LOW);
