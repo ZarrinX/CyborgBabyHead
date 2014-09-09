@@ -71,7 +71,7 @@ void loop()
   
   if(digitalRead(TiltSen) != TiltState) // When the tilt sensor is triggered, do this
   {
-    delay(700);
+    delay(400);
     if(digitalRead(TiltSen) != TiltState)
     {
       HorrorShow();
@@ -91,7 +91,43 @@ void loop()
   // The Eye will rapidly change color for a moment
   if (randVal == randRGB)
   {
-    RGB();
+    int EyeMode = random(0, 4);
+    
+    if (EyeMode == 0}
+    {
+      RGB();
+    }
+    
+    // Dim Blue
+    if (EyeMode == 1)
+    {
+      digitalWrite(bLED, 127);
+    } 
+    
+    // Orange
+    if (EyeMode == 2)
+    {
+      digitalWrite(rLED, HIGH);
+      digitalWrite(gLED, LOW);
+      digitalWrite(bLED, HIGH);
+
+    } 
+    
+    // Purple
+    if (EyeMode == 3)
+    {
+      digitalWrite(rLED, HIGH);
+      digitalWrite(gLED, LOW);
+      digitalWrite(bLED, HIGH);
+    } 
+    
+    // Purple
+    if (EyeMode == 4)
+    {
+      digitalWrite(rLED, 59);
+      digitalWrite(gLED, 200);
+      digitalWrite(bLED, 120);
+    } 
   }
   
   // Make the severed spine "twitch"
