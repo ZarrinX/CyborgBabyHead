@@ -25,9 +25,10 @@ int gLED = 5;
 int bLED = 3;
 
 // Random values for idle events (values chosen at random because why not?)
-int randWink = 213;
-int randRGB = 61;
+int randWink = 800;
+int randRGB = 333;
 int randSpine = 19;
+int randLightsOut = 489;
 
 int TiltSen = 12; // Tilt Sensor. Basically an momentary switch
 int Motor = 10; // Vibrations
@@ -37,7 +38,7 @@ Servo BabySpine;  // Create servo object to control a servo
 
 void setup() 
 { 
-  randomSeed(analogRead(0)); // Used to trigger randomized events in "Idle" and "HorrorShow" mode (I put a wire on this pin to act as an inductor to generate more truely random values)
+  randomSeed(analogRead(0)); // Used to trigger randomized events in "Idle" mode (I put a wire on this pin to act as an inductor to generate more truely random values)
   
   // \/ Best Servo name
   BabySpine.attach(9);  // attaches the servo on pin 9 to the servo object. Know your servo cable colors http://www.fatlion.com/sailplanes/servos.html
@@ -66,15 +67,21 @@ void setup()
 
 void loop()
 {
-  randVal = random(256); // Sets the random seed for this loop
+  randVal = random(0, 4096); // Sets the random seed for this loop
   
   if(digitalRead(TiltSen) != TiltState) // When the tilt sensor is triggered, do this
   {
-    HorrorShow();
+    delay(700);
+    if(digitalRead(TiltSen) != TiltState)
+    {
+      HorrorShow();
+    }
   }
   
-  // "Idle" behavior
-  if (randVal = randWink)
+  // "Idle" behaviors
+  
+  // Make the Right Eye wink
+  if (randVal == randWink)
   {
     digitalWrite(Eye, HIGH);
     delay(200);
@@ -82,19 +89,32 @@ void loop()
   }
   
   // The Eye will rapidly change color for a moment
-  if (randVal = randRGB)
+  if (randVal == randRGB)
   {
     RGB();
   }
   
   // Make the severed spine "twitch"
-  if (randVal = randSpine)
+  if (randVal == randSpine)
   {
-    BabySpine.write (random(20, 160));
+    BabySpine.write (random(70, 110));
   }
   
+  // Turn off the Left eye
+  if (randVal == randLightsOut)
+  {
+    digitalWrite(rLED, HIGH);
+    digitalWrite(gLED, HIGH);
+    digitalWrite(bLED, HIGH);
+  }
   
+  delay(10); //The loop is happening too fast, the random fuction is meh so it needs to  be slower
 }
+
+
+
+
+
 
 //  Kinetic events triggered by the disruption of the tilt sensor
 void HorrorShow()
@@ -107,16 +127,16 @@ void HorrorShow()
   
   digitalWrite(Motor, HIGH); // Turn on the vibration motor
   
-  long previousMillis = 0;        // will store last time HorrorShow was updated
-  
-  unsigned long currentMillis = millis(); // Starts the 5 seconds timer for the HorrorShow event (defined in thr global variable "Interval")
-  
+  int count = 0;
   //int value = random(20, 160);
-  while(currentMillis - previousMillis > Interval)
+  while(count <= 18)
   {
     int val = random(20, 160);
     BabySpine.write(val);
+    digitalWrite(Eye, HIGH);
     delay(random(40, 350));
+    digitalWrite(Eye, LOW);
+    count = count +1;
   }
   
   digitalWrite(Motor, LOW); // Turn off the vibration motor
@@ -126,28 +146,24 @@ void HorrorShow()
   digitalWrite(gLED, HIGH);
   digitalWrite(bLED, LOW);
   
+  delay(500);
   TiltState = digitalRead(TiltSen); // Last event. Store the current Tilt sensor value (Lets the main loop know the baby head isn't moving anymore)
+  
+  
 }
 
+//Change the eye color for a moment
 void RGB()
 {
     digitalWrite(gLED, LOW);
     digitalWrite(bLED, HIGH);
     delay(random(40, 350));
-    digitalWrite(gLED, HIGH);
-    digitalWrite(bLED, LOW);
-    delay(random(40, 350));
-    digitalWrite(gLED, HIGH);
-    digitalWrite(gLED, LOW);
-    delay(random(40, 350));
-    digitalWrite(gLED, LOW);
-    digitalWrite(bLED, HIGH);
-    delay(random(40, 350)); 
     digitalWrite(rLED, LOW);
     digitalWrite(gLED, LOW);
-    digitalWrite(bLED, LOW);
-    delay(random(40, 450)); 
+    digitalWrite(bLED, HIGH);
+    delay(random(40, 100));
     digitalWrite(rLED, HIGH);
     digitalWrite(gLED, HIGH);
     digitalWrite(bLED, LOW);
+    delay(random(40, 350));
 }
