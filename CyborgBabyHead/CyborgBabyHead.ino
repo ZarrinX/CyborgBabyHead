@@ -93,7 +93,7 @@ void loop()
   {
     int EyeMode = random(0, 4);
     
-    if (EyeMode == 0}
+    if (EyeMode == 0)
     {
       RGB();
     }
@@ -101,10 +101,10 @@ void loop()
     // Dim Blue
     if (EyeMode == 1)
     {
-      digitalWrite(bLED, 127);
+      analogWrite(bLED, 127);
     } 
     
-    // Orange
+    // Green
     if (EyeMode == 2)
     {
       digitalWrite(rLED, HIGH);
@@ -116,17 +116,17 @@ void loop()
     // Purple
     if (EyeMode == 3)
     {
-      digitalWrite(rLED, HIGH);
-      digitalWrite(gLED, LOW);
-      digitalWrite(bLED, HIGH);
+      digitalWrite(rLED, LOW);
+      digitalWrite(gLED, HIGH);
+      digitalWrite(bLED, LOW);
     } 
     
-    // Purple
+    // A Color?
     if (EyeMode == 4)
     {
-      digitalWrite(rLED, 59);
-      digitalWrite(gLED, 200);
-      digitalWrite(bLED, 120);
+      analogWrite(rLED, 59);
+      analogWrite(gLED, 200);
+      analogWrite(bLED, 120);
     } 
   }
   
