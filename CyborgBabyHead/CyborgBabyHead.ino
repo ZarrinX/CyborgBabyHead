@@ -10,6 +10,11 @@
  https://github.com/ZarrinX 
  */
 
+
+/***************************************************************
+START GLOBALS
+***************************************************************/
+
 #include <Servo.h> 
 
 // Global Variables
@@ -35,6 +40,16 @@ int Motor = 10; // Vibrations
 int Eye = 11; // Wink ;). Literally. This is probably the creepiest part.
 
 Servo BabySpine;  // Create servo object to control a servo
+
+/***************************************************************
+END GLOBALS
+***************************************************************/
+
+
+
+/***************************************************************
+START SETUP
+***************************************************************/
 
 void setup() 
 { 
@@ -64,6 +79,16 @@ void setup()
   digitalWrite(Eye, LOW);
   
 } 
+
+/***************************************************************
+END SETUP
+***************************************************************/
+
+
+
+/***************************************************************
+START MAIN LOOP
+***************************************************************/
 
 void loop()
 {
@@ -101,7 +126,8 @@ void loop()
     // Dim Blue
     if (EyeMode == 1)
     {
-      analogWrite(bLED, 127);
+      digitalWrite(gLED, LOW);
+      digitalWrite(bLED, LOW);
     } 
     
     // Green
@@ -124,9 +150,9 @@ void loop()
     // A Color?
     if (EyeMode == 4)
     {
-      analogWrite(rLED, 59);
-      analogWrite(gLED, 200);
-      analogWrite(bLED, 120);
+      digitalWrite(rLED, LOW);
+      digitalWrite(gLED, LOW);
+      digitalWrite(bLED, LOW);
     } 
   }
   
@@ -147,6 +173,9 @@ void loop()
   delay(10); //The loop is happening too fast, the random fuction is meh so it needs to  be slower
 }
 
+/***************************************************************
+END MAIN LOOP
+***************************************************************/
 
 
 
@@ -165,7 +194,7 @@ void HorrorShow()
   
   int count = 0;
   //int value = random(20, 160);
-  while(count <= 18)
+  while(count <= 28)
   {
     int val = random(20, 160);
     BabySpine.write(val);
