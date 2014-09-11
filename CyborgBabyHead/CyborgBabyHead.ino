@@ -196,10 +196,10 @@ void HorrorShow()
   //int value = random(20, 160);
   while(count <= 28)
   {
-    int val = random(20, 160);
+    int val = random(0, 180);
     BabySpine.write(val);
     digitalWrite(Eye, HIGH);
-    delay(random(40, 350));
+    delay(random(100, 550));
     digitalWrite(Eye, LOW);
     count = count +1;
   }
