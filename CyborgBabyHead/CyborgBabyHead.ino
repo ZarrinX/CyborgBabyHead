@@ -159,7 +159,7 @@ void loop()
   // Make the severed spine "twitch"
   if (randVal == randSpine)
   {
-    BabySpine.write (random(70, 110));
+    BabySpine.write (random(30, 140));
   }
   
   // Turn off the Left eye
